@@ -16,6 +16,15 @@ dp = Dispatcher()
 
 DB_NAME = "database.db"
 
+async def main():
+    await init_db()
+    print("Бот запущено...")
+    # Обов'язково має бути await перед dp.start_polling(bot)
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
 async def init_db():
     async with aiosqlite.connect(DB_NAME) as db:
         await db.execute("""
